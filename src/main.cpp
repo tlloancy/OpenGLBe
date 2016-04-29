@@ -13,7 +13,9 @@ int	init_window(GLFWwindow** window)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // Nous voulons OpenGL 3.3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // Nous ne voulons pas de support de l'ancien OpenGL
-
+#ifdef __APPLE__
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
 	// Ouvre une fenêtre et crée son contexte OpenGL
 	*window = glfwCreateWindow( 1024, 768, "Tutorial 01", NULL, NULL);
 	if( *window == NULL ){
@@ -42,7 +44,9 @@ int main()
 		// N'affiche rien, à bientôt dans le deuxième tutoriel !
 		render_vertex(programID, vertexbuffer);
 		render_matrix(programID, MVP);
-
+#ifdef	__APPLE__
+		glfwPollEvents();
+#endif
 		// Échange les tampons
 		glfwSwapBuffers(window);
 

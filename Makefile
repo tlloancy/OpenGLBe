@@ -14,16 +14,17 @@ SRCSERV = 	src/main.cpp \
 
 CC		=	clang++
 FLAGS	=	-Wall -Werror -Wextra -O3
-INC		=	-Iinc #-Ilibprotocol/includes -Ilibft/includes
 
 # OS NAME
 OS := $(shell uname -s)
 
 ifeq ($(OS),Darwin)
-CC_CMD = $(CC) -o $@ $(OBJSERV) #$(LPROTOCOLFLAGS) $(LFTFLAGS)
+CC_CMD = $(CC) -o $@ $(OBJSERV) -L $(HOME)/.brew/lib -lglfw3 -lGLEW -framework OpenGL #-DAPPLE#$(LPROTOCOLFLAGS) $(LFTFLAGS) 
 OBJ_CMD = $(CC) $(FLAGS) -o $@ -c $< $(INC)
+INC		=	-Iinc -I$(HOME)/.brew/include #-Ilibprotocol/includes -Ilibft/includes
 endif
 ifeq ($(OS),Linux)
+INC		=	-Iinc #-Ilibprotocol/includes -Ilibft/includes
 CC_CMD = $(CC) -o $@ $(OBJSERV) -lglfw -lGLEW -lGL#$(LPROTOCOLFLAGS) $(LFTFLAGS) -Wl,--no-as-needed
 OBJ_CMD = $(CC) $(FLAGS) -o $@ -c $< $(INC)
 endif
