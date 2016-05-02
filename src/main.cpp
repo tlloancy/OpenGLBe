@@ -44,9 +44,9 @@ int main()
 		// N'affiche rien, à bientôt dans le deuxième tutoriel !
 		render_vertex(programID, vertexbuffer);
 		render_matrix(programID, MVP);
-#ifdef	__APPLE__
+//#ifdef	__APPLE__// Linux compile quand même mais le clavier n'est pas pris en charge
 		glfwPollEvents();
-#endif
+//#endif
 		// Échange les tampons
 		glfwSwapBuffers(window);
 
